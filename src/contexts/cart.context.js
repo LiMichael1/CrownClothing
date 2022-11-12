@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from 'react';
 
 export const addCartItem = (cartItems, productToAdd) => {
-  // Check if Cart Item exists
+  // Find if Cart contains productToAdd
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
   );
 
-  // Add one to existing Cart Item
+  // If found, increment quantity
   if (existingCartItem) {
     return cartItems.map((cartItem) => {
       return cartItem.id === productToAdd.id
@@ -15,23 +15,23 @@ export const addCartItem = (cartItems, productToAdd) => {
     });
   }
 
-  // Add original Cart Item
+  // Return new Array with modified cart items/ new cart items
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
 const removeCartItem = (cartItems, cartItemToRemove) => {
-  // find the cart item to remove
+  // Find if Cart contains itemToRemove
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToRemove.id
   );
 
-  // Remove Item from Cart if there's only one quantity
+  // If found & quantity is one, remove the item from Cart
   if (existingCartItem.quantity === 1) {
     // Returns an array without that cart item
     return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
   }
 
-  // Return back Cart Items with matching cart item with reduced quantity
+  // If found & quantity > 1, decrement quantity
   return cartItems.map((cartItem) => {
     return cartItem.id === cartItemToRemove.id
       ? { ...cartItem, quantity: cartItem.quantity - 1 }
@@ -39,6 +39,7 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   });
 };
 
+// Return Cart (new Array) without itemToClear
 const clearCartItem = (cartItems, cartItemToClear) =>
   cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 
@@ -101,3 +102,26 @@ export const CartProvider = ({ children }) => {
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
+
+/*
+product
+[
+  id,
+  name,
+  price,
+  imageUrl
+]
+
+*/
+
+/*
+Cart Item
+[
+  id,
+  name,
+  price,
+  imageUrl,
+  quantity
+]
+
+*/
