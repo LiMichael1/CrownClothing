@@ -4,6 +4,18 @@ Crown Clothing is a E-Commerce Web app
 
 https://king-clothing-store.netlify.app/
 
+![HomePage](https://github.com/LiMichael1/CrownClothing/blob/main/public/screenshots/HomePage.PNG)
+
+Home Page
+
+![Shop](https://github.com/LiMichael1/CrownClothing/blob/main/public/screenshots/Shop.PNG)
+
+Shopping Different Items
+
+![AddToCart](https://github.com/LiMichael1/CrownClothing/blob/main/public/screenshots/AddToCart.png)
+
+Adding Items to Cart
+
 ## Requirements
 
 - npm
