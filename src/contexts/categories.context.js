@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   categoriesMap: [],
 };
 
-export const CATEGORIES_ACTION_TYPES = {
+const CATEGORIES_ACTION_TYPES = {
   SET_CATEGORIES_MAP: 'SET_CATEGORIES_MAP',
 };
 
@@ -52,7 +52,6 @@ export const CategoriesProvider = ({ children }) => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments();
       setCategoriesMap(categoryMap);
-      console.log(categoryMap);
     };
 
     getCategoriesMap();

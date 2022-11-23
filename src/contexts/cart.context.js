@@ -2,7 +2,7 @@ import { createContext, useReducer } from 'react';
 
 import { createAction } from '../utils/reducer/reducer.util';
 
-export const CART_ACTION_TYPES = {
+const CART_ACTION_TYPES = {
   SET_CART_ITEMS: 'SET_CART_ITEMS',
   SET_IS_CART_OPEN: 'SET_IS_CART_OPEN',
 };

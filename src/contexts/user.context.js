@@ -15,7 +15,7 @@ export const UserContext = createContext({
 });
 
 // USER ACTION TYPES - define clearly the types
-export const USER_ACTION_TYPES = {
+const USER_ACTION_TYPES = {
   SET_CURRENT_USER: 'SET_CURRENT_USER',
 };
 
@@ -44,7 +44,6 @@ const INITIAL_STATE = {
 export const UserProvider = ({ children }) => {
   // const [currentUser, setCurrentUser] = useState(null);
   const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
-  console.log(currentUser);
 
   const setCurrentUser = (user) => {
     dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
