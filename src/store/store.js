@@ -1,15 +1,24 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+
+import createSagaMiddleware from 'redux-saga';
+
+import { rootSaga } from './root-saga';
 
 import { rootReducer } from './root-reducer';
-import loggerMiddleware from './middleware/logger';
+// import loggerMiddleware from './middleware/logger';
+
+const sagaMiddleware = createSagaMiddleware();
 
 // Only run middleware when development
 // & filter out anything that isn't true
 const middleWares = [
-  process.env.NODE_ENV === 'development' && loggerMiddleware,
+  process.env.NODE_ENV === 'development' && logger,
+  // thunk,
+  sagaMiddleware,
 ].filter(Boolean);
 
 const composeEnhancer =
@@ -22,6 +31,7 @@ const persistConfig = {
   key: 'root', // location where the state is at
   storage, // browser local storage usually
   blacklist: ['user'], // User State depends on Firebase listener
+  // whitelist: ['cart'], // only persist the cart -> get Categories from firebase already
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -33,5 +43,7 @@ export const store = createStore(
   undefined,
   composedEnhancers
 );
+
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
